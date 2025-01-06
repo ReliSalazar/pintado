@@ -1,5 +1,6 @@
 import { Mail, Smartphone } from "lucide-react";
 import FullPageSection from "../components/FullPageSection";
+import whatsapp from "../assets/img/whatsapp.svg";
 
 const About = () => {
   return (
@@ -41,7 +42,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/whatsapp.svg" className="w-4 h-4 md:w-6 md:h-6" />
+            <img src={whatsapp} className="w-4 h-4 md:w-6 md:h-6" />
           </a>
 
           <a

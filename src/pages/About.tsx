@@ -45,7 +45,7 @@ const About = () => {
           </a>
 
           <a
-            className="bg-[#70111c] rounded-full p-2"
+            className="bg-[#70111c] rounded-full p-2 hover:bg-red-900 ease-in-out duration-300"
             href="tel:7721244386"
             target="_blank"
             rel="noopener noreferrer"
@@ -54,7 +54,7 @@ const About = () => {
           </a>
 
           <a
-            className="bg-[#70111c] rounded-full p-2"
+            className="bg-[#70111c] rounded-full p-2 hover:bg-red-900 ease-in-out duration-300"
             href="mailto:email@example.com"
             target="_blank"
             rel="noopener noreferrer"

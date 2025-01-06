@@ -36,7 +36,7 @@ const About = () => {
 
         <div className="container flex gap-4 items-center justify-center">
           <a
-            className="bg-[#70111c] rounded-full p-2"
+            className="bg-[#70111c] rounded-full p-2 hover:bg-red-900 ease-in-out duration-300"
             href="https://wa.me/+527721244386?text=Hola,%20vi%20tu%20tarjeta%20de%20negocio%20y%20%20me%20gustar%C3%ADa%20hacerte%20una%20consulta"
             target="_blank"
             rel="noopener noreferrer"

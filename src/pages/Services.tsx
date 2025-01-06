@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import FullPageSection from "../components/FullPageSection";
-import { useRef } from "react";
+import { useState } from "react";
+import { ChevronRight } from "lucide-react";
 
 interface Service {
   id: number;
@@ -9,41 +10,79 @@ interface Service {
 }
 
 const Services = () => {
-  const toggleRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [activeSection, setActiveSection] = useState<number | null>(null);
 
   const handleToggle = (id: number) => {
-    const element = toggleRefs.current[id];
-    if (element) {
-      element.classList.toggle("hidden");
-      element.classList.toggle("opacity-0");
-      element.classList.toggle("opacity-100");
-      element.classList.toggle("max-h-0");
-      element.classList.toggle("max-h-screen");
-    }
+    setActiveSection((prev) => (prev === id ? null : id));
   };
 
   const services: Service[] = [
-    { id: 1, name: "Servicio A", info: "Información del Servicio A" },
-    { id: 2, name: "Servicio B", info: "Información del Servicio B" },
-    { id: 3, name: "Servicio C", info: "Información del Servicio C" },
+    {
+      id: 1,
+      name: "Derecho familiar",
+      info: "La familia es el núcleo más importante de la sociedad, y en momentos de conflicto, es esencial contar con un respaldo legal que garantice una solución justa. Ya sea que necesites apoyo en divorcios, custodia de hijos, pensiones alimenticias o sucesiones, trabajamos para proteger tus intereses y fomentar soluciones pacíficas y equitativas.",
+    },
+    {
+      id: 2,
+      name: "Derecho civil",
+      info: "Desde contratos hasta disputas legales, el derecho civil abarca situaciones cotidianas que pueden volverse complejas sin la orientación adecuada. Te asesoramos en temas como demandas por incumplimiento, indemnizaciones, propiedad y arrendamiento, asegurando que tus derechos se hagan valer de manera eficiente.",
+    },
+    {
+      id: 3,
+      name: "Derecho laboral",
+      info: "Tanto trabajadores como empleadores necesitan claridad y justicia en las relaciones laborales. Representamos tus intereses en casos de despidos injustificados, conflictos laborales, prestaciones o auditorías laborales. Nuestro objetivo es resolver los conflictos con un enfoque estratégico y efectivo.",
+    },
+    {
+      id: 4,
+      name: "Derecho mercantil",
+      info: "Las operaciones comerciales necesitan un marco legal sólido para evitar riesgos. En Cardoso Soluciones Jurídicas, te ayudamos a gestionar contratos, resolver conflictos empresariales y garantizar que tus transacciones cumplan con la normativa vigente. Protegemos tu negocio para que puedas centrarte en hacerlo crecer.",
+    },
+    {
+      id: 5,
+      name: "Derecho penal",
+      info: "Enfrentar un proceso penal puede ser una experiencia intimidante. Ofrecemos defensa legal sólida, estratégica y discreta en casos relacionados con delitos patrimoniales, de violencia o cualquier otro tipo. Nuestro compromiso es garantizar que tus derechos sean respetados en cada etapa del proceso.",
+    },
+    {
+      id: 6,
+      name: "Derecho de amparo",
+      info: "Cuando tus derechos fundamentales están en riesgo, el amparo es la herramienta legal más poderosa. Te representamos en juicios de amparo para protegerte contra actos de autoridad que vulneren tus derechos humanos. Nuestra experiencia en este campo asegura un manejo técnico y eficaz de tu caso.",
+    },
   ];
 
   return (
-    <FullPageSection id="services" className="bg-orange-500 text-white">
-      <div className="container border border-black">
-        <div className="space-y-4 p-4">
+    <FullPageSection id="services" className="text-white">
+      <div className="container py-5 px-4">
+        <div className="space-y-2 py-4 max-h-screen overflow-y-scroll">
           {services.map((service) => (
-            <div key={service.id} className="border rounded-lg">
+            <div key={service.id}>
               <button
                 onClick={() => handleToggle(service.id)}
-                className="w-full text-left px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 transition"
+                className={classNames(
+                  "w-full text-left font-bold text-base md:text-lg lg:text-xl flex gap-2 justify-between px-4 py-4 bg-zinc-900 text-zinc-300 border-l-4 ease-in-out duration-300",
+                  {
+                    "border-zinc-300": activeSection === service.id,
+                    "border-zinc-900": activeSection !== service.id,
+                  },
+                )}
               >
                 {service.name}
+                <ChevronRight
+                  className={classNames("transition-transform duration-300", {
+                    "rotate-90": activeSection === service.id,
+                    "rotate-0": activeSection !== service.id,
+                  })}
+                />
               </button>
+
               <div
-                ref={(el) => (toggleRefs.current[service.id] = el)}
                 className={classNames(
-                  "hidden opacity-0 max-h-0 transition-all duration-500 overflow-hidden px-4 py-2 bg-gray-100",
+                  "transition-all duration-500 ease-in-out overflow-hidden px-4 py-2 bg-zinc-800 text-sm md:text-base lg:text-lg transform",
+                  {
+                    "max-h-0 opacity-0 scale-95 translate-y-[-10px]":
+                      activeSection !== service.id,
+                    "max-h-screen opacity-100 scale-100 translate-y-0":
+                      activeSection === service.id,
+                  },
                 )}
               >
                 {service.info}

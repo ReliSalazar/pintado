@@ -8,7 +8,6 @@ import civilLaw from "../assets/img/services/civil-law.jpg";
 import laboralLaw from "../assets/img/services/laboral-law.jpg";
 import comercialLaw from "../assets/img/services/commercial-law.webp";
 import criminalLaw from "../assets/img/services/criminal-law.webp";
-import rightProtection from "../assets/img/services/right-protection.jpg";
 
 interface Service {
   id: number;
@@ -55,16 +54,14 @@ const Services = () => {
       info: "Enfrentar un proceso penal puede ser una experiencia intimidante. Ofrecemos defensa legal sólida, estratégica y discreta en casos relacionados con delitos patrimoniales, de violencia o cualquier otro tipo. Nuestro compromiso es garantizar que tus derechos sean respetados en cada etapa del proceso.",
       img: criminalLaw,
     },
-    {
-      id: 6,
-      name: "Derecho de amparo",
-      info: "Cuando tus derechos fundamentales están en riesgo, el amparo es la herramienta legal más poderosa. Te representamos en juicios de amparo para protegerte contra actos de autoridad que vulneren tus derechos humanos. Nuestra experiencia en este campo asegura un manejo técnico y eficaz de tu caso.",
-      img: rightProtection,
-    },
   ];
 
   return (
-    <FullPageSection id="services" className="text-white" align="items-start">
+    <FullPageSection
+      id="services"
+      className="text-white"
+      align="items-start md:items-center"
+    >
       <div className="container py-5 px-4">
         <div className="space-y-2 max-h-screen">
           {services.map((service) => (
@@ -72,7 +69,7 @@ const Services = () => {
               <button
                 onClick={() => handleToggle(service.id)}
                 className={classNames(
-                  "w-full text-left font-bold text-base md:text-lg lg:text-xl flex gap-2 justify-between px-4 py-2 bg-zinc-900 text-zinc-300 border-l-4 ease-in-out duration-300",
+                  "w-full text-left font-bold text-base md:text-lg lg:text-xl flex gap-2 justify-between px-4 py-2 md:py-4 bg-zinc-900 text-zinc-300 border-l-4 ease-in-out duration-300",
                   {
                     "border-zinc-300": activeSection === service.id,
                     "border-zinc-900": activeSection !== service.id,
@@ -100,7 +97,23 @@ const Services = () => {
                 )}
               >
                 {service.info}
-                <img src={service.img} alt="" className="lg:max-w-60" />
+                <div
+                  className="relative w-full lg:max-w-60 aspect-[16/9] bg-zinc-700 rounded-md"
+                  style={{
+                    backgroundImage: `url(${service.img})`,
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <img
+                    src={service.img}
+                    alt=""
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-0"
+                    onLoad={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                  />
+                </div>
               </div>
             </div>
           ))}

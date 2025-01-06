@@ -45,7 +45,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 justify-center w-screen text-center">
+        <div className="flex flex-col gap-2 justify-center w-full text-center">
           <p>Visita nuestras oficinas</p>
           <div className="w-full h-60 md:h-96 overflow-hidden shadow-lg">
             <iframe
